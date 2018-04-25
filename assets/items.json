@@ -1,0 +1,31 @@
+{
+  "items": [
+    {
+      "id": "i1",
+      "name": "A",
+      "imageURL": "",
+      "css": {
+        "width": 500,
+        "height": 300
+      }
+    },
+    {
+      "id": "i2",
+      "name": "B",
+      "imageURL": "",
+      "css": {
+        "width": 500,
+        "height": 300
+      }
+    },
+    {
+      "id": "i3",
+      "name": "C",
+      "imageURL": "",
+      "css": {
+        "width": 500,
+        "height": 300
+      }
+    }
+  ]
+}
