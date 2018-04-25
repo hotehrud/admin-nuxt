@@ -3,7 +3,7 @@
     {
       "id": "i1",
       "name": "A",
-      "imageURL": "",
+      "imageURL": "http://localhost:3000/images/1.jpeg",
       "css": {
         "width": 500,
         "height": 300
@@ -12,7 +12,7 @@
     {
       "id": "i2",
       "name": "B",
-      "imageURL": "",
+      "imageURL": "http://localhost:3000/images/2.jpeg",
       "css": {
         "width": 500,
         "height": 300
@@ -21,7 +21,70 @@
     {
       "id": "i3",
       "name": "C",
-      "imageURL": "",
+      "imageURL": "http://localhost:3000/images/3.jpeg",
+      "css": {
+        "width": 500,
+        "height": 300
+      }
+    },
+    {
+      "id": "i4",
+      "name": "D",
+      "imageURL": "http://localhost:3000/images/4.jpeg",
+      "css": {
+        "width": 500,
+        "height": 300
+      }
+    },
+    {
+      "id": "i5",
+      "name": "E",
+      "imageURL": "http://localhost:3000/images/5.jpeg",
+      "css": {
+        "width": 500,
+        "height": 300
+      }
+    },
+    {
+      "id": "i6",
+      "name": "F",
+      "imageURL": "http://localhost:3000/images/6.jpeg",
+      "css": {
+        "width": 500,
+        "height": 300
+      }
+    },
+    {
+      "id": "i7",
+      "name": "G",
+      "imageURL": "http://localhost:3000/images/7.jpeg",
+      "css": {
+        "width": 500,
+        "height": 300
+      }
+    },
+    {
+      "id": "i8",
+      "name": "H",
+      "imageURL": "http://localhost:3000/images/8.jpeg",
+      "css": {
+        "width": 500,
+        "height": 300
+      }
+    },
+    {
+      "id": "i9",
+      "name": "I",
+      "imageURL": "http://localhost:3000/images/9.jpeg",
+      "css": {
+        "width": 500,
+        "height": 300
+      }
+    },
+    {
+      "id": "i10",
+      "name": "J",
+      "imageURL": "http://localhost:3000/images/10.jpeg",
       "css": {
         "width": 500,
         "height": 300

@@ -91,6 +91,8 @@ const app = __WEBPACK_IMPORTED_MODULE_0_express___default()();
 const host = process.env.HOST || "127.0.0.1";
 const port = process.env.PORT || 3000;
 
+app.use(__WEBPACK_IMPORTED_MODULE_0_express___default.a.static("assets"));
+
 app.set("port", port);
 
 // Import API Routes
