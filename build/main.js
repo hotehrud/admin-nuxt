@@ -62,7 +62,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -73,15 +73,21 @@ module.exports = require("express");
 
 /***/ }),
 /* 1 */
+/***/ (function(module, exports) {
+
+module.exports = require("path");
+
+/***/ }),
+/* 2 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_nuxt__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_nuxt__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_nuxt___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_nuxt__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__api__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__api__ = __webpack_require__(4);
 
 
 
@@ -119,19 +125,19 @@ app.listen(port, host);
 console.log("Server listening on " + host + ":" + port); // eslint-disable-line no-console
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, exports) {
 
 module.exports = require("nuxt");
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__items__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__items__ = __webpack_require__(5);
 
 
 
@@ -144,13 +150,13 @@ router.use(__WEBPACK_IMPORTED_MODULE_1__items__["a" /* default */]);
 /* harmony default export */ __webpack_exports__["a"] = (router);
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_express___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_express__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_path__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_path__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_path___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_path__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_fs__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_fs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_fs__);
@@ -182,12 +188,6 @@ router.get("/items/:id", function (req, res, next) {
 /* harmony default export */ __webpack_exports__["a"] = (router);
 
 /***/ }),
-/* 5 */
-/***/ (function(module, exports) {
-
-module.exports = require("path");
-
-/***/ }),
 /* 6 */
 /***/ (function(module, exports) {
 
@@ -195,7 +195,22 @@ module.exports = require("fs");
 
 /***/ }),
 /* 7 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(__dirname) {const resolve = __webpack_require__(1).resolve;
+
+const isVueRule = rule => {
+  return rule.test.toString() === "/\\.vue$/";
+};
+const isSASSRule = rule => {
+  return ["/\\.sass$/", "/\\.scss$/"].indexOf(rule.test.toString()) !== -1;
+};
+const sassResourcesLoader = {
+  loader: "sass-resources-loader",
+  options: {
+    resources: [resolve(__dirname, "assets/scss/variables.scss")]
+  }
+};
 
 module.exports = {
   /*
@@ -213,6 +228,7 @@ module.exports = {
   /*
   ** Build configuration
   */
+  css: [{ src: "~/assets/scss/main.scss", lang: "scss" }],
   build: {
     /*
     ** Run ESLint on save
@@ -227,9 +243,19 @@ module.exports = {
           exclude: /(node_modules)/
         });
       }
+      config.module.rules.forEach(rule => {
+        if (isVueRule(rule)) {
+          rule.options.loaders.sass.push(sassResourcesLoader);
+          rule.options.loaders.scss.push(sassResourcesLoader);
+        }
+        if (isSASSRule(rule)) {
+          rule.use.push(sassResourcesLoader);
+        }
+      });
     }
   }
 };
+/* WEBPACK VAR INJECTION */}.call(exports, ""))
 
 /***/ })
 /******/ ]);

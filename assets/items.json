@@ -89,6 +89,42 @@
         "width": 500,
         "height": 300
       }
+    },
+    {
+      "id": "i11",
+      "name": "K",
+      "imageURL": "http://localhost:3000/images/11.jpg",
+      "css": {
+        "width": 500,
+        "height": 300
+      }
+    },
+    {
+      "id": "i12",
+      "name": "L",
+      "imageURL": "http://localhost:3000/images/12.jpg",
+      "css": {
+        "width": 500,
+        "height": 300
+      }
+    },
+    {
+      "id": "i13",
+      "name": "M",
+      "imageURL": "http://localhost:3000/images/13.jpeg",
+      "css": {
+        "width": 500,
+        "height": 300
+      }
+    },
+    {
+      "id": "i14",
+      "name": "O",
+      "imageURL": "http://localhost:3000/images/14.jpeg",
+      "css": {
+        "width": 500,
+        "height": 300
+      }
     }
   ]
 }
