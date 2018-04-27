@@ -1,3 +1,18 @@
+const resolve = require("path").resolve;
+
+const isVueRule = rule => {
+  return rule.test.toString() === "/\\.vue$/";
+};
+const isSASSRule = rule => {
+  return ["/\\.sass$/", "/\\.scss$/"].indexOf(rule.test.toString()) !== -1;
+};
+const sassResourcesLoader = {
+  loader: "sass-resources-loader",
+  options: {
+    resources: [resolve(__dirname, "assets/scss/variables.scss")]
+  }
+};
+
 module.exports = {
   /*
   ** Headers of the page
@@ -18,6 +33,7 @@ module.exports = {
   /*
   ** Build configuration
   */
+  css: [{ src: "~/assets/scss/main.scss", lang: "scss" }],
   build: {
     /*
     ** Run ESLint on save
@@ -32,6 +48,15 @@ module.exports = {
           exclude: /(node_modules)/
         });
       }
+      config.module.rules.forEach(rule => {
+        if (isVueRule(rule)) {
+          rule.options.loaders.sass.push(sassResourcesLoader);
+          rule.options.loaders.scss.push(sassResourcesLoader);
+        }
+        if (isSASSRule(rule)) {
+          rule.use.push(sassResourcesLoader);
+        }
+      });
     }
   }
 };
