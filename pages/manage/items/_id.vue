@@ -1,7 +1,7 @@
 <template>
   <div class="image-container">
     <section class="image-section">
-      <div class="image-section-content">
+      <div class="image-section-content" @click="openFileChooser">
         <photo :is-link="false" :photo-url="item.imageURL" class="photo"/>
       </div>
       <div class="image-section-sidebar">
@@ -10,7 +10,7 @@
           <a>Download</a>
         </div>
         <div class="box">
-          <div class="btn-upload" @click="openFileChooser">
+          <div class="btn-upload" @click="uploadFile">
             <span>Change</span>
             <input id="input_img" ref="file" type="file" accept="image/*" @change="previewFile">
           </div>
@@ -27,6 +27,7 @@
 
 <script>
 import Photo from "~/components/Photo";
+import axios from "~/plugins/axios";
 
 export default {
   components: {
@@ -69,6 +70,17 @@ export default {
       setTimeout(() => {
         document.getElementById("input_img").dispatchEvent(event);
       }, 0);
+    },
+    async uploadFile() {
+      const file = document.querySelector("input[type=file]").files[0];
+      if (file) {
+        const fd = new FormData();
+        fd.append("upload_file", file);
+
+        const config = { headers: { "Content-Type": "multipart/form-data" } };
+        let data = await axios.post("/api/upload", fd, config);
+        console.log(data);
+      }
     }
   }
 };
@@ -96,6 +108,7 @@ export default {
       border-radius: 1rem;
       padding: 2rem;
       width: 70%;
+      cursor: pointer;
       @include respond-to($phone) {
         width: 100%;
       }
@@ -103,6 +116,7 @@ export default {
         display: flex;
         justify-content: center;
         img {
+          max-width: 100%;
           max-height: 500px;
           @include respond-to($phone) {
             width: 100%;
