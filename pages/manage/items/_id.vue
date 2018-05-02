@@ -33,8 +33,10 @@ export default {
   components: {
     Photo
   },
-  asyncData() {
-    return {};
+  asyncData({ params }) {
+    return {
+      id: params.id
+    };
   },
   head() {
     return {
@@ -75,7 +77,8 @@ export default {
       const file = document.querySelector("input[type=file]").files[0];
       if (file) {
         const fd = new FormData();
-        fd.append("upload_file", file);
+        fd.append("index", this.id);
+        fd.append("imageURL", file);
 
         const config = { headers: { "Content-Type": "multipart/form-data" } };
         let data = await axios.post("/api/upload", fd, config);

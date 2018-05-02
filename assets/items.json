@@ -93,7 +93,7 @@
     {
       "id": "i11",
       "name": "K",
-      "imageURL": "http://localhost:3000/images/11.jpg",
+      "imageURL": "http://localhost:3000/images/11.jpeg",
       "css": {
         "width": 500,
         "height": 300

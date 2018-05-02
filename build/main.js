@@ -12624,6 +12624,8 @@ router.get("/items/:id", function (req, res, next) {
 
 
 const router = Object(__WEBPACK_IMPORTED_MODULE_0_express__["Router"])();
+let filepath = process.cwd() + "/assets/items.json";
+let staticpath = "http://localhost:3000/images/";
 
 const storage = __WEBPACK_IMPORTED_MODULE_1_multer___default.a.diskStorage({
   destination: (req, file, cb) => {
@@ -12644,10 +12646,30 @@ const upload = __WEBPACK_IMPORTED_MODULE_1_multer___default()({
   }
 });
 
-router.post("/upload", upload.single("upload_file"), (req, res, next) => {
-  console.log(req.file);
+router.post("/upload", upload.single("imageURL"), (req, res, next) => {
+  const body = req.body;
+  const id = parseInt(body.index);
+  const obj = JSON.parse(__WEBPACK_IMPORTED_MODULE_3_fs___default.a.readFileSync(filepath));
+  let update = {
+    imageURL: staticpath + req.file.filename
+  };
 
-  res.sendStatus(201);
+  Object.keys(body).forEach(key => {
+    update[key] = body[key];
+  });
+
+  if (id >= 0 && id < obj.items.length) {
+    const target = obj.items[id];
+    Object.keys(target).forEach(key => {
+      if (update.hasOwnProperty(key)) {
+        target[key] = update[key];
+      }
+    });
+  }
+
+  __WEBPACK_IMPORTED_MODULE_3_fs___default.a.writeFile(filepath, JSON.stringify(obj), "utf8", () => {
+    res.sendStatus(201);
+  });
 });
 
 /* harmony default export */ __webpack_exports__["a"] = (router);
