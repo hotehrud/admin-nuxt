@@ -12703,13 +12703,13 @@ function dirTree(filename) {
   var stats = __WEBPACK_IMPORTED_MODULE_2_fs___default.a.lstatSync(filename),
       info = {
     path: filename,
-    name: __WEBPACK_IMPORTED_MODULE_1_path___default.a.basename(filename)
+    label: __WEBPACK_IMPORTED_MODULE_1_path___default.a.basename(filename)
   };
 
   if (stats.isDirectory()) {
     info.type = "folder";
-    info.children = __WEBPACK_IMPORTED_MODULE_2_fs___default.a.readdirSync(filename).map(function (child) {
-      return dirTree(filename + "/" + child);
+    info.nodes = __WEBPACK_IMPORTED_MODULE_2_fs___default.a.readdirSync(filename).map(node => {
+      return dirTree(filename + "/" + node);
     });
   } else {
     info.type = "file";

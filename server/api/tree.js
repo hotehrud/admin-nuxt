@@ -8,13 +8,13 @@ function dirTree(filename) {
   var stats = fs.lstatSync(filename),
     info = {
       path: filename,
-      name: path.basename(filename)
+      label: path.basename(filename)
     };
 
   if (stats.isDirectory()) {
     info.type = "folder";
-    info.children = fs.readdirSync(filename).map(function(child) {
-      return dirTree(filename + "/" + child);
+    info.nodes = fs.readdirSync(filename).map((node) => {
+      return dirTree(filename + "/" + node);
     });
   } else {
     info.type = "file";

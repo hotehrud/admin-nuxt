@@ -2,7 +2,7 @@
   <div class="image-container">
     <section class="image-section">
       <div class="image-section-content" @click="openFileChooser">
-        <photo :is-link="false" :photo-url="item.imageURL" class="photo"/>
+        <photo :is-link="false" :photo-url="item.imageURL" class="photo" />
       </div>
       <div class="image-section-sidebar">
         <div class="box">
@@ -14,8 +14,8 @@
             <input id="input_img" ref="file" type="file" accept="image/*" @change="previewFile">
           </div>
         </div>
-        <div class="box"/>
-        <div class="box"/>
+        <div class="box" />
+        <div class="box" />
       </div>
     </section>
     <section class="details-section">

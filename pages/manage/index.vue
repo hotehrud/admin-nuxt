@@ -1,10 +1,13 @@
 <template>
   <div>
-    <tree-view/>
+    <div class="sidebar">
+      <tree-view :label="tree.label" :nodes="tree.nodes" :depth="0" class="tree_container"/>
+    </div>
+
     <section class="container gallery">
       <photo v-for="(item, index) in items" :key="index" :photo-id="item.id" :photo-name="item.name" :photo-url="item.imageURL" class="photo_area">
         <nuxt-link slot="img" :to="'/manage/items/' + index" class="photo_link">
-          <img :src="item.imageURL" class="photo-img">
+          <img :src="item.imageURL" class="photo_img">
         </nuxt-link>
       </photo>
     </section>
@@ -31,20 +34,32 @@ export default {
   computed: {
     items() {
       return this.$store.getters.items;
+    },
+    tree() {
+      return this.$store.getters.tree;
     }
   }
 };
 </script>
 
 <style lang="scss">
+.sidebar {
+  background-color: #fff;
+  flex-basis: 25%;
+  .tree_container {
+    position: fixed;
+    margin: 2rem;
+  }
+}
 .gallery {
-  max-width: 800px;
+  max-width: 900px;
   padding: 1em;
-  border-radius: 1em;
+  border: 1rem solid #eee;
   background-color: #fff;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  margin: 0 auto;
   .photo_area {
     background-color: #333;
     min-width: 12rem;
