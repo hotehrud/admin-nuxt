@@ -5,7 +5,6 @@
         <photo :is-link="false" :photo-url="item.imageURL" class="photo"/>
       </div>
       <div class="image-section-sidebar">
-
         <div class="box">
           <a>Download</a>
         </div>
@@ -43,8 +42,8 @@ export default {
       title: "Item"
     };
   },
-  fetch({ store, params }) {
-    store.dispatch("getItem", params.id);
+  async fetch({ store, params }) {
+    await store.dispatch("getItem", params.id);
   },
   computed: {
     item() {

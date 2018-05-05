@@ -18,6 +18,7 @@ export default {
 <style>
 #body {
   margin: 0 auto;
+  display: flex;
 }
 
 .button--green {

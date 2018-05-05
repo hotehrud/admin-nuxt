@@ -1,26 +1,32 @@
 <template>
-  <section class="container gallery">
-    <photo v-for="(item, index) in items" :key="index" :photo-id="item.id" :photo-name="item.name" :photo-url="item.imageURL" class="photo_area">
-      <nuxt-link slot="img" :to="'/manage/items/' + index" class="photo_link">
-        <img :src="item.imageURL" class="photo-img">
-      </nuxt-link>
-    </photo>
-  </section>
+  <div>
+    <tree-view/>
+    <section class="container gallery">
+      <photo v-for="(item, index) in items" :key="index" :photo-id="item.id" :photo-name="item.name" :photo-url="item.imageURL" class="photo_area">
+        <nuxt-link slot="img" :to="'/manage/items/' + index" class="photo_link">
+          <img :src="item.imageURL" class="photo-img">
+        </nuxt-link>
+      </photo>
+    </section>
+  </div>
 </template>
 
 <script>
 import Photo from "~/components/Photo";
+import TreeView from "~/components/Tree";
 export default {
   components: {
-    Photo
+    Photo,
+    TreeView
   },
   head() {
     return {
       title: "Items"
     };
   },
-  fetch({ store, params }) {
-    store.dispatch("getItems");
+  async fetch({ store, params }) {
+    await store.dispatch("getItems");
+    await store.dispatch("getTree");
   },
   computed: {
     items() {
