@@ -17,5 +17,6 @@ nav {
   align-items: center;
   background-color: #222;
   color: #fff;
+  z-index: 10;
 }
 </style>

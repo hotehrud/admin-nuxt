@@ -1,9 +1,5 @@
 <template>
   <div>
-    <div class="sidebar">
-      <tree-view :label="tree.label" :nodes="tree.nodes" :depth="0" class="tree_container"/>
-    </div>
-
     <section class="container gallery">
       <photo v-for="(item, index) in items" :key="index" :photo-id="item.id" :photo-name="item.name" :photo-url="item.imageURL" class="photo_area">
         <nuxt-link slot="img" :to="'/manage/items/' + index" class="photo_link">
@@ -16,11 +12,9 @@
 
 <script>
 import Photo from "~/components/Photo";
-import TreeView from "~/components/Tree";
 export default {
   components: {
-    Photo,
-    TreeView
+    Photo
   },
   head() {
     return {
@@ -29,28 +23,16 @@ export default {
   },
   async fetch({ store, params }) {
     await store.dispatch("getItems");
-    await store.dispatch("getTree");
   },
   computed: {
     items() {
       return this.$store.getters.items;
-    },
-    tree() {
-      return this.$store.getters.tree;
     }
   }
 };
 </script>
 
 <style lang="scss">
-.sidebar {
-  background-color: #fff;
-  flex-basis: 25%;
-  .tree_container {
-    position: fixed;
-    margin: 2rem;
-  }
-}
 .gallery {
   max-width: 900px;
   padding: 1em;
