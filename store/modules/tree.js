@@ -2,7 +2,10 @@ import axios from "~/plugins/axios";
 
 const state = {
   _tree: {},
-  _focus: ""
+  _focus: {
+    path: "",
+    extensions: ""
+  }
 };
 
 const getters = {
@@ -10,25 +13,10 @@ const getters = {
     return state._tree;
   },
   currentPath(state) {
-    return state._focus;
+    return state._focus.path;
   },
-  currentPathIdx(state, getters, rootState) {
-    let n = 2;
-    for (let [index, obj] of rootState.items._items.entries()) {
-      let a = obj.imageURL.split("/").slice(-n);
-      let b = state._focus.split("/").slice(-n);
-      let flag = true;
-      for (let i = 0; i < n; i++) {
-        if (a[i] !== b[i]) {
-          flag = false;
-          break;
-        }
-      }
-      if (flag) {
-        return index;
-      }
-    }
-    return -1;
+  currentExtensions(state) {
+    return state._focus.extensions;
   }
 };
 
@@ -36,8 +24,10 @@ const mutations = {
   setTree(state, tree) {
     state._tree = tree;
   },
-  setCurrentPath(state, path) {
-    state._focus = path;
+  setCurrentType(state, type) {
+    console.log("Store");
+    state._focus.path = type.path;
+    state._focus.extensions = type.extensions;
   }
 };
 
@@ -50,7 +40,12 @@ const actions = {
     commit("setTree", data);
   },
   currentPath({ commit }, path) {
-    commit("setCurrentPath", path);
+    let ext = "." + path.split(".").pop();
+    let current = {
+      path: path,
+      extensions: ext
+    };
+    commit("setCurrentType", current);
   }
 };
 

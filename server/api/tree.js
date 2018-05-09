@@ -3,17 +3,19 @@ import path from "path";
 import fs from "fs";
 
 const router = Router();
+let target = "assets";
 
 function dirTree(filename) {
-  var stats = fs.lstatSync(filename),
-    info = {
-      path: filename,
-      label: path.basename(filename)
-    };
+  const stats = fs.lstatSync(filename);
+  const info = {
+    origin: filename,
+    path: filename.slice(filename.indexOf(target) + target.length),
+    label: path.basename(filename)
+  };
 
   if (stats.isDirectory()) {
     info.type = "folder";
-    info.nodes = fs.readdirSync(filename).map((node) => {
+    info.nodes = fs.readdirSync(filename).map(node => {
       return dirTree(filename + "/" + node);
     });
   } else {
@@ -24,7 +26,7 @@ function dirTree(filename) {
 }
 
 router.get("/tree", function(req, res, next) {
-  res.json(dirTree(process.cwd() + "/assets"));
+  res.json(dirTree(process.cwd() + "/" + target));
 });
 
 export default router;

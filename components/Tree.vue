@@ -66,9 +66,9 @@ export default {
     },
     previewFile() {
       this.$store.dispatch("currentPath", this.path);
-      let idx = this.$store.getters.currentPathIdx;
-      console.log(idx);
-      // this.$router.push({ name: "manage-items-id", params: { id: idx } });
+      this.$router.push({
+        name: "manage-preview"
+      });
     }
   }
 };

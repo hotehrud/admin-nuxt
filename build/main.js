@@ -12698,11 +12698,13 @@ module.exports = require("multer");
 
 
 const router = Object(__WEBPACK_IMPORTED_MODULE_0_express__["Router"])();
+let target = "assets";
 
 function dirTree(filename) {
-  var stats = __WEBPACK_IMPORTED_MODULE_2_fs___default.a.lstatSync(filename),
-      info = {
-    path: filename,
+  const stats = __WEBPACK_IMPORTED_MODULE_2_fs___default.a.lstatSync(filename);
+  const info = {
+    origin: filename,
+    path: filename.slice(filename.indexOf(target) + target.length),
     label: __WEBPACK_IMPORTED_MODULE_1_path___default.a.basename(filename)
   };
 
@@ -12719,7 +12721,7 @@ function dirTree(filename) {
 }
 
 router.get("/tree", function (req, res, next) {
-  res.json(dirTree(process.cwd() + "/assets"));
+  res.json(dirTree(process.cwd() + "/" + target));
 });
 
 /* harmony default export */ __webpack_exports__["a"] = (router);

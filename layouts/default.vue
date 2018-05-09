@@ -43,13 +43,9 @@ export default {
   }
 
   #body {
-    position: relative;
+    position: absolute;
     width: 75%;
     left: 25%;
-    > section,
-    aside {
-      padding-top: 1rem;
-    }
   }
 
   li {
