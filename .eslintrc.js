@@ -21,6 +21,7 @@ module.exports = {
     semi: [2, "always"],
     "no-console": "off",
     "vue/max-attributes-per-line": "off",
+    "vue/no-confusing-v-for-v-if": "off",
     "prettier/prettier": ["error", { semi: true }],
     "no-unused-vars": ["error", { args: "none" }]
   }

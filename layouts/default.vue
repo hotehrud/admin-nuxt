@@ -1,31 +1,55 @@
 <template>
-  <div>
+  <div id="layout">
     <header-nav/>
-    <nuxt id="body"/>
+    <div id="sidebar">
+      <tree-view :label="tree.label" :nodes="tree.nodes" :depth="0" :path="tree.path" class="tree_container" />
+    </div>
+    <nuxt id="body" />
   </div>
 </template>
 
 <script>
-import headerNav from "~/components/Header.vue";
+import HeaderNav from "~/components/Header.vue";
+import TreeView from "~/components/Tree";
 
 export default {
   components: {
-    headerNav
+    HeaderNav,
+    TreeView
+  },
+  async fetch({ store, params }) {
+    await store.dispatch("getTree");
+  },
+  computed: {
+    tree() {
+      return this.$store.getters.tree;
+    }
   }
 };
 </script>
 
 <style lang="scss">
-#body {
-  margin: 0 auto;
-  display: flex;
-  > section,
-  aside {
-    padding-top: 1rem;
+#layout {
+  #sidebar {
+    position: fixed;
+    top: 0;
+    padding-top: 3.25rem;
+    background-color: #fff;
+    width: 25%;
+    height: 100%;
+    .tree_container {
+      margin: 2rem;
+    }
   }
-}
 
-li {
-  list-style: none;
+  #body {
+    position: absolute;
+    width: 75%;
+    left: 25%;
+  }
+
+  li {
+    list-style: none;
+  }
 }
 </style>

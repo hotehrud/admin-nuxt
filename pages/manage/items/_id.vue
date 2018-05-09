@@ -77,6 +77,8 @@ export default {
       if (file) {
         const fd = new FormData();
         fd.append("index", this.id);
+        fd.append("filename", "items.json");
+        fd.append("type", "json");
         fd.append("imageURL", file);
 
         const config = { headers: { "Content-Type": "multipart/form-data" } };
@@ -149,9 +151,6 @@ export default {
             line-height: 50px;
             font-size: 1.25rem;
           }
-        }
-        #input_img {
-          display: none;
         }
       }
     }
